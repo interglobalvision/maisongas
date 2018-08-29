@@ -20,26 +20,34 @@ if (have_posts()) {
 ?>
 
     <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+
+      <section id="top" class="margin-bottom-large">
 <?php
     if (!empty($top_image)) {
 ?>
-      <section id="top">
-        <div class="grid-row">
+
+        <div class="grid-row justify-center margin-bottom-small">
           <div class="grid-item">
-            <?php echo wp_get_attachment_image($top_image); ?>
+            <?php echo wp_get_attachment_image($top_image, 'height-900'); ?>
           </div>
         </div>
-      </section>
+
 <?php
     }
 ?>
+        <div class="grid-row justify-center font-uppercase">
+          <div class="grid-item">
+            <span>Los Angeles</span>
+          </div>
+        </div>
+      </section>
 
-      <section id="about">
+      <section id="about" class="margin-bottom-large">
 <?php
     if (!empty($text_1)) {
 ?>
-        <div class="grid-row">
-          <div class="grid-item">
+        <div class="grid-row margin-bottom-mid">
+          <div class="grid-item font-size-mid">
             <?php echo apply_filters('the_content', $text_1); ?>
           </div>
         </div>
@@ -52,15 +60,15 @@ if (have_posts()) {
         <?php
           if (!empty($middle_image_1)) {
         ?>
-          <div class="grid-item item-s-12 item-m-6">
-            <?php echo wp_get_attachment_image($middle_image_1); ?>
+          <div class="grid-item item-s-12 item-m-6 text-align-center">
+            <?php echo wp_get_attachment_image($middle_image_1, 'height-900'); ?>
           </div>
         <?php
           }
           if (!empty($middle_image_2)) {
         ?>
-          <div class="grid-item item-s-12 item-m-6">
-            <?php echo wp_get_attachment_image($middle_image_2); ?>
+          <div class="grid-item item-s-12 item-m-6 text-align-center">
+            <?php echo wp_get_attachment_image($middle_image_2, 'height-900'); ?>
           </div>
         <?php
           }
@@ -70,8 +78,8 @@ if (have_posts()) {
     }
     if (!empty($text_2)) {
 ?>
-        <div class="grid-row">
-          <div class="grid-item">
+        <div class="grid-row margin-top-mid">
+          <div class="grid-item font-size-mid">
             <?php echo apply_filters('the_content', $text_2); ?>
           </div>
         </div>
@@ -87,7 +95,12 @@ if (have_posts()) {
     */
 
 ?>
-      <section id="stockists">
+      <section id="stockists" class="margin-bottom-large font-uppercase">
+        <div class="grid-row margin-bottom-tiny">
+          <div class="grid-item">
+            <h2>Stockists</h2>
+          </div>
+        </div>
 <?php
     if (!empty($stockists)) {
 ?>
@@ -98,15 +111,15 @@ if (have_posts()) {
             foreach($stockists as $shop) {
           ?>
             <div class="grid-item item-s-12 item-m-6">
-              <span><?php echo $shop['name']; ?></span>
-              <span><?php echo !empty($shop['map_url']) ? '<a href="' . $shop['map_url'] . '">' . $shop['address'] . '</a>' : $shop['address']; ?></span>
+              <div><span><?php echo $shop['name']; ?></span></div>
+              <div><?php echo !empty($shop['map_url']) ? '<a href="' . $shop['map_url'] . '">' . $shop['address'] . '</a>' : '<span>' . $shop['address'] . '</span>'; ?></div>
             </div>
           <?php
             }
           ?>
           </div>
-          <div class="grid-item item-s-12 item-m-4">
-            <?php echo wp_get_attachment_image($stockists_image); ?>
+          <div class="grid-item item-s-12 item-m-4 no-gutter align-self-end">
+            <?php echo wp_get_attachment_image($stockists_image, 'width-640'); ?>
           </div>
         </div>
 
