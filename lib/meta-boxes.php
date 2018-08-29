@@ -35,9 +35,9 @@ function igv_cmb_metaboxes() {
   $prefix = '_igv_';
 
   /**
-  * Metaboxes declarations here
-  * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
-  */
+   * Metaboxes declarations here
+   * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
+   */
 
   $home_page = get_page_by_path('home');
 
@@ -58,15 +58,15 @@ function igv_cmb_metaboxes() {
       'id'         => $prefix . 'home_top_image',
       'type'       => 'file',
       'options' => array(
-    		'url' => false, // Hide the text input for the url
-    	),
-    	// query_args are passed to wp.media's library query.
-    	'query_args' => array(
-    		'type' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      // query_args are passed to wp.media's library query.
+      'query_args' => array(
+        'type' => array(
           'image/jpeg',
-	        'image/png',
+          'image/png',
         ),
-    	),
+      ),
     ) );
 
     $home_metabox->add_field( array(
@@ -80,15 +80,15 @@ function igv_cmb_metaboxes() {
       'id'         => $prefix . 'home_middle_image_1',
       'type'       => 'file',
       'options' => array(
-    		'url' => false, // Hide the text input for the url
-    	),
-    	// query_args are passed to wp.media's library query.
-    	'query_args' => array(
-    		'type' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      // query_args are passed to wp.media's library query.
+      'query_args' => array(
+        'type' => array(
           'image/jpeg',
-	        'image/png',
+          'image/png',
         ),
-    	),
+      ),
     ) );
 
     $home_metabox->add_field( array(
@@ -96,15 +96,15 @@ function igv_cmb_metaboxes() {
       'id'         => $prefix . 'home_middle_image_2',
       'type'       => 'file',
       'options' => array(
-    		'url' => false, // Hide the text input for the url
-    	),
-    	// query_args are passed to wp.media's library query.
-    	'query_args' => array(
-    		'type' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      // query_args are passed to wp.media's library query.
+      'query_args' => array(
+        'type' => array(
           'image/jpeg',
-	        'image/png',
+          'image/png',
         ),
-    	),
+      ),
     ) );
 
     $home_metabox->add_field( array(
@@ -149,15 +149,15 @@ function igv_cmb_metaboxes() {
       'id'         => $prefix . 'home_stockists_image',
       'type'       => 'file',
       'options' => array(
-    		'url' => false, // Hide the text input for the url
-    	),
-    	// query_args are passed to wp.media's library query.
-    	'query_args' => array(
-    		'type' => array(
+        'url' => false, // Hide the text input for the url
+      ),
+      // query_args are passed to wp.media's library query.
+      'query_args' => array(
+        'type' => array(
           'image/jpeg',
-	        'image/png',
+          'image/png',
         ),
-    	),
+      ),
     ) );
   }
 }
