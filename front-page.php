@@ -39,7 +39,7 @@ if (have_posts()) {
     if (!empty($text_1)) {
 ?>
         <div class="grid-row">
-          <div class="grid-item">
+          <div class="grid-item font-size-mid">
             <?php echo apply_filters('the_content', $text_1); ?>
           </div>
         </div>
@@ -71,7 +71,7 @@ if (have_posts()) {
     if (!empty($text_2)) {
 ?>
         <div class="grid-row">
-          <div class="grid-item">
+          <div class="grid-item font-size-mid">
             <?php echo apply_filters('the_content', $text_2); ?>
           </div>
         </div>
@@ -98,8 +98,8 @@ if (have_posts()) {
             foreach($stockists as $shop) {
           ?>
             <div class="grid-item item-s-12 item-m-6">
-              <span><?php echo $shop['name']; ?></span>
-              <span><?php echo !empty($shop['map_url']) ? '<a href="' . $shop['map_url'] . '">' . $shop['address'] . '</a>' : $shop['address']; ?></span>
+              <div><span><?php echo $shop['name']; ?></span></div>
+              <div><?php echo !empty($shop['map_url']) ? '<a href="' . $shop['map_url'] . '">' . $shop['address'] . '</a>' : '<span>' . $shop['address'] . '</span>'; ?></div>
             </div>
           <?php
             }
