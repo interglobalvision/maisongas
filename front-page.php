@@ -35,7 +35,7 @@ if (have_posts()) {
 ?>
 
       <section id="about">
-<?
+<?php
     if (!empty($text_1)) {
 ?>
         <div class="grid-row">
@@ -45,6 +45,7 @@ if (have_posts()) {
         </div>
 <?php
     }
+
     if (!empty($middle_image_1) || !empty($middle_image_2)) {
 ?>
         <div class="grid-row">
