@@ -3,8 +3,7 @@ get_header();
 ?>
 
 <main id="main-content">
-  <section id="posts">
-    <div class="container">
+  <div class="container">
 
 <?php
 if (have_posts()) {
@@ -17,21 +16,26 @@ if (have_posts()) {
     $middle_image_2 = get_post_meta($post->ID, '_igv_home_middle_image_2_id', true);
     $text_2 = get_post_meta($post->ID, '_igv_home_text_2', true);
     $stockists = get_post_meta($post->ID, '_igv_home_stockists', true);
-    $stockists_image = get_post_meta($post->ID, '_igv_home_stockists_image_id', true);
+    $stockists_image = get_post_meta($post->ID, '_igv_home_stockists_image_2_id', true);
 ?>
 
-      <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-
+    <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 <?php
     if (!empty($top_image)) {
 ?>
+      <section id="top">
         <div class="grid-row">
           <div class="grid-item">
             <?php echo wp_get_attachment_image($top_image); ?>
           </div>
         </div>
+      </section>
 <?php
     }
+?>
+
+      <section id="about">
+<?
     if (!empty($text_1)) {
 ?>
         <div class="grid-row">
@@ -72,13 +76,21 @@ if (have_posts()) {
         </div>
 <?php
     }
+?>
+      </section>
+
+<?php
 
     /*
     * EDITIONS will go here
     */
 
+?>
+      <section id="stockists">
+<?php
     if (!empty($stockists)) {
 ?>
+
         <div class="grid-row">
           <div class="grid-item item-s-12 item-m-8 no-gutter grid-row">
           <?php
@@ -96,20 +108,20 @@ if (have_posts()) {
             <?php echo wp_get_attachment_image($stockists_image); ?>
           </div>
         </div>
+
 <?php
     }
 ?>
+      </section>
 
-      </article>
+    </article>
 
 <?php
   }
 }
 ?>
 
-    </div>
-  </section>
-
+  </div>
 </main>
 
 <?php
