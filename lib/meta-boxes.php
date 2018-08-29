@@ -167,7 +167,7 @@ function igv_cmb_metaboxes() {
     'object_types'  => array( 'edition' ), // Post type
   ) );
 
-  $home_metabox->add_field( array(
+  $edition_metabox->add_field( array(
     'name'       => esc_html__( 'Number', 'cmb2' ),
     'id'         => $prefix . 'edition_number',
     'type'       => 'text_small',
