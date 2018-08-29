@@ -4,8 +4,8 @@ $margin-micro = ($gutter / 3)
 $margin-tiny = ($gutter / 2)
 $margin-small = ($gutter)
 $margin-basic = ($gutter * 2)
-$margin-mid = ($gutter * 3.5)
-$margin-large = ($gutter * 5)
+$margin-mid = ($gutter * 4)
+$margin-large = ($gutter * 8)
 
 $font-size-basic = 20px
 $font-size-mid = 24px
@@ -16,3 +16,17 @@ grid-maker(100%, $gutter, s)
 space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
 font-sizes($font-size-basic, false, $font-size-large, $font-size-mid)
+
+// ******************************************************
+
+// HEADER
+
+#nav-about
+  order: 1
+
+#nav-stockists
+  order: 2
+  text-align: right
+
+#site-title
+  order: 3
