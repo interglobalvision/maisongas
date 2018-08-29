@@ -160,5 +160,17 @@ function igv_cmb_metaboxes() {
       ),
     ) );
   }
+
+  $edition_metabox = new_cmb2_box( array(
+    'id'            => $prefix . 'edition_metabox',
+    'title'         => esc_html__( 'Fields', 'cmb2' ),
+    'object_types'  => array( 'edition' ), // Post type
+  ) );
+
+  $home_metabox->add_field( array(
+    'name'       => esc_html__( 'Number', 'cmb2' ),
+    'id'         => $prefix . 'edition_number',
+    'type'       => 'text_small',
+  ) );
 }
 ?>
