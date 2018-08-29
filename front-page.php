@@ -88,7 +88,7 @@ if (have_posts()) {
               <span><?php echo $shop['name']; ?></span>
               <span><?php echo !empty($shop['map_url']) ? '<a href="' . $shop['map_url'] . '">' . $shop['address'] . '</a>' : $shop['address']; ?></span>
             </div>
-          <?
+          <?php
             }
           ?>
           </div>
