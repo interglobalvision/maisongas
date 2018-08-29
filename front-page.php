@@ -91,8 +91,45 @@ if (have_posts()) {
 <?php
 
     /*
-    * EDITIONS will go here
+    * EDITIONS
     */
+
+    $args = array(
+      'post_type' => array( 'edition' ),
+      'posts_per_page' => '-1',
+      'orderby' => 'meta_value_number',
+      'meta_key' => '_igv_edition_number',
+    );
+
+    $edition_query = new WP_Query( $args );
+
+    if ( $edition_query->have_posts() ) {
+?>
+      <section id="editions" class="margin-bottom-large font-uppercase">
+<?php
+      while ( $edition_query->have_posts() ) {
+        $edition_query->the_post();
+
+        $edition_number = get_post_meta($post->ID, '_igv_edition_number', true);
+?>
+        <div class="grid-row">
+          <div class="grid-item item-s-12 item-m-6 no-gutter">
+            <?php echo the_post_thumbnail('height-900'); ?>
+          </div>
+          <div class="grid-item item-s-12 item-m-6">
+            <div><span><?php echo !empty($edition_number) ? 'Edition ' . $edition_number : ''; ?></span></div>
+            <div><?php the_content(); ?></div>
+          </div>
+        </div>
+<?php
+      }
+?>
+      </section>
+
+<?php
+    }
+
+    wp_reset_postdata();
 
 ?>
       <section id="stockists" class="margin-bottom-large font-uppercase">
@@ -106,19 +143,19 @@ if (have_posts()) {
 ?>
 
         <div class="grid-row">
-          <div class="grid-item item-s-12 item-m-8 no-gutter grid-row">
+          <div class="grid-item item-s-12 item-m-8 no-gutter grid-row align-content-start">
           <?php
             foreach($stockists as $shop) {
           ?>
             <div class="grid-item item-s-12 item-m-6">
               <div><span><?php echo $shop['name']; ?></span></div>
-              <div><?php echo !empty($shop['map_url']) ? '<a href="' . $shop['map_url'] . '">' . $shop['address'] . '</a>' : '<span>' . $shop['address'] . '</span>'; ?></div>
+              <div><?php echo !empty($shop['map_url']) ? '<a href="' . $shop['map_url'] . '">' . apply_filters('the_content', $shop['address']) . '</a>' : apply_filters('the_content', $shop['address']); ?></div>
             </div>
           <?php
             }
           ?>
           </div>
-          <div class="grid-item item-s-12 item-m-4 no-gutter align-self-end">
+          <div class="grid-item item-s-12 item-m-4 no-gutter align-self-end margin-top-mid">
             <?php echo wp_get_attachment_image($stockists_image, 'width-640'); ?>
           </div>
         </div>
