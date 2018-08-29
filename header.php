@@ -28,16 +28,16 @@ get_template_part('partials/seo');
 
 <section id="main-container">
 
-  <header id="header">
+  <header id="header" class="margin-bottom-basic">
     <div class="container">
       <div class="grid-row font-uppercase">
-        <div id="nav-about" class="grid-item item-s-6 item-m-3">
+        <div id="nav-about" class="grid-item item-s-6 item-m-3 padding-top-small">
           <a href="#about">About</a>
         </div>
-        <div id="site-title" class="grid-item item-s-12 item-m-6 text-align-center">
+        <div id="site-title" class="grid-item item-s-12 item-m-6 text-align-center padding-top-tiny">
           <h1 class="font-size-large"><a href="<?php echo home_url(); ?>">Maison Gas</a></h1>
         </div>
-        <div id="nav-stockists" class="grid-item item-s-6 item-m-3">
+        <div id="nav-stockists" class="grid-item item-s-6 item-m-3 padding-top-small">
           <a href="#stockists">Stockists</a>
         </div>
       </div>

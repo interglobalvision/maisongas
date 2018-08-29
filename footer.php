@@ -1,13 +1,13 @@
 <?php
   $options = get_site_option('_igv_site_options');
 ?>
-  <footer id="footer">
+  <footer id="footer" class="margin-bottom-mid">
     <div class="container">
-      <div class="grid-row text-align-center">
+      <div class="grid-row text-align-center font-uppercase">
       <?php
         if (!empty($options['socialmedia_instagram'])) {
       ?>
-        <div class="grid-item item-s-12">
+        <div class="grid-item item-s-12 margin-bottom-tiny">
           <a href="https://instagram.com/<?php echo $options['socialmedia_instagram']; ?>">Instagram</a>
         </div>
       <?php
