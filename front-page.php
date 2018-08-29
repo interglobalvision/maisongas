@@ -17,7 +17,7 @@ if (have_posts()) {
     $middle_image_2 = get_post_meta($post->ID, '_igv_home_middle_image_2_id', true);
     $text_2 = get_post_meta($post->ID, '_igv_home_text_2', true);
     $stockists = get_post_meta($post->ID, '_igv_home_stockists', true);
-    $stockists_image = get_post_meta($post->ID, '_igv_home_stockists_image_2_id', true);
+    $stockists_image = get_post_meta($post->ID, '_igv_home_stockists_image_id', true);
 ?>
 
       <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
