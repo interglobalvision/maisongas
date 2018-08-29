@@ -145,9 +145,19 @@ function igv_cmb_metaboxes() {
     ) );
 
     $home_metabox->add_field( array(
-      'name'       => esc_html__( 'Contact Email', 'cmb2' ),
-      'id'         => $prefix . 'contact_email',
-      'type'       => 'text_email',
+      'name'       => esc_html__( 'Stockists Image', 'cmb2' ),
+      'id'         => $prefix . 'home_stockists_image',
+      'type'       => 'file',
+      'options' => array(
+    		'url' => false, // Hide the text input for the url
+    	),
+    	// query_args are passed to wp.media's library query.
+    	'query_args' => array(
+    		'type' => array(
+          'image/jpeg',
+	        'image/png',
+        ),
+    	),
     ) );
   }
 }
