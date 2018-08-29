@@ -7,6 +7,9 @@ import lazySizes from 'lazysizes';
 // Import style
 import '../styl/site.styl';
 
+// Import components
+import Scroll from './Scroll';
+
 class Site {
   constructor() {
     this.mobileThreshold = 601;
@@ -37,3 +40,4 @@ class Site {
 }
 
 new Site();
+new Scroll();
