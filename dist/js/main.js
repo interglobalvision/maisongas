@@ -902,7 +902,7 @@ var Scroll = function () {
     _classCallCheck(this, Scroll);
 
     // value in pixels elements scrolled to will be from top of the window
-    this.scrollOffset = 20;
+    this.scrollOffset = 60;
 
     $(document).ready(this.onReady.bind(this));
   }
