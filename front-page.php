@@ -74,7 +74,7 @@ if (have_posts()) {
 
     if (!empty($middle_image_1) || !empty($middle_image_2)) {
 ?>
-        <div class="grid-row">
+        <div class="grid-row align-items-center">
         <?php
           if (!empty($middle_image_1)) {
         ?>
