@@ -21,7 +21,13 @@ function scripts_and_styles_method() {
     $honeypotImages = get_post_meta($home_page->ID, '_igv_home_honeypot_images', true);
 
     if (!empty($honeypotImages)) {
-      $javascriptVars['honeypotImages'] = $honeypotImages;
+      $imageArray = array();
+
+      foreach($honeypotImages as $key => $value) {
+        array_push($imageArray, wp_get_attachment_image_url($key, 'height-900'));
+      }
+
+      $javascriptVars['honeypotImages'] = $imageArray;
     }
   }
 

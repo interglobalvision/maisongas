@@ -150,7 +150,7 @@ var Site = function () {
       var honeypotCount = 0; // how many images have been generated
 
       var honeypotInterval = setInterval(function () {
-        var $honeypotImage = $('<img src="' + WP.honeypotImages[Object.keys(WP.honeypotImages)[index]] + '" class="honeypot-image" />'); // the image to generate
+        var $honeypotImage = $('<img src="' + WP.honeypotImages[index] + '" class="honeypot-image" />'); // the image to generate
 
         $('body').append($honeypotImage); // append the image to body
 
