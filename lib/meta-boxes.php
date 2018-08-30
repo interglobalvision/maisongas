@@ -60,19 +60,17 @@ function igv_cmb_metaboxes() {
       'options' => array(
         'url' => false, // Hide the text input for the url
       ),
-      // query_args are passed to wp.media's library query.
-      'query_args' => array(
-        'type' => array(
-          'image/jpeg',
-          'image/png',
-        ),
-      ),
+      'query_args' => array( 'type' => 'image' ),
     ) );
 
     $home_metabox->add_field( array(
       'name'       => esc_html__( 'Text 1', 'cmb2' ),
       'id'         => $prefix . 'home_text_1',
-      'type'       => 'textarea',
+      'type'       => 'wysiwyg',
+      'options' => array(
+        'media_buttons' => false, // show insert/upload button(s)
+        'textarea_rows' => get_option('default_post_edit_rows', 5), // rows="..."
+      ),
     ) );
 
     $home_metabox->add_field( array(
@@ -82,13 +80,7 @@ function igv_cmb_metaboxes() {
       'options' => array(
         'url' => false, // Hide the text input for the url
       ),
-      // query_args are passed to wp.media's library query.
-      'query_args' => array(
-        'type' => array(
-          'image/jpeg',
-          'image/png',
-        ),
-      ),
+      'query_args' => array( 'type' => 'image' ),
     ) );
 
     $home_metabox->add_field( array(
@@ -98,19 +90,26 @@ function igv_cmb_metaboxes() {
       'options' => array(
         'url' => false, // Hide the text input for the url
       ),
-      // query_args are passed to wp.media's library query.
-      'query_args' => array(
-        'type' => array(
-          'image/jpeg',
-          'image/png',
-        ),
-      ),
+      'query_args' => array( 'type' => 'image' ),
     ) );
 
     $home_metabox->add_field( array(
       'name'       => esc_html__( 'Text 2', 'cmb2' ),
       'id'         => $prefix . 'home_text_2',
-      'type'       => 'textarea',
+      'type'       => 'wysiwyg',
+      'options' => array(
+        'media_buttons' => false, // show insert/upload button(s)
+        'textarea_rows' => get_option('default_post_edit_rows', 5), // rows="..."
+      ),
+    ) );
+
+    $home_metabox->add_field( array(
+      'name'       => esc_html__( 'Honeypot Images', 'cmb2' ),
+      'description' => esc_html__( '<span class="honeypot">your text</span>', 'cmb2' ),
+      'id'         => $prefix . 'home_honeypot_images',
+      'type'       => 'file_list',
+      'preview_size' => array( 150, 150 ),
+      'query_args' => array( 'type' => 'image' ),
     ) );
 
     $stockists_group = $home_metabox->add_field( array(
@@ -151,13 +150,7 @@ function igv_cmb_metaboxes() {
       'options' => array(
         'url' => false, // Hide the text input for the url
       ),
-      // query_args are passed to wp.media's library query.
-      'query_args' => array(
-        'type' => array(
-          'image/jpeg',
-          'image/png',
-        ),
-      ),
+      'query_args' => array( 'type' => 'image' ),
     ) );
   }
 
