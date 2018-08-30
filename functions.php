@@ -15,6 +15,16 @@ function scripts_and_styles_method() {
     'isAdmin' => $is_admin,
   );
 
+  $home_page = get_page_by_path('home');
+
+  if(!empty($home_page)) {
+    $honeypotImages = get_post_meta($home_page->ID, '_igv_home_honeypot_images', true);
+
+    if (!empty($honeypotImages)) {
+      $javascriptVars['honeypotImages'] = $honeypotImages;
+    }
+  }
+
   wp_register_script('javascript-main', $javascriptMain);
   wp_localize_script('javascript-main', 'WP', $javascriptVars);
   wp_enqueue_script('javascript-main', $javascriptMain, '', '', true);

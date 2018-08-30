@@ -88,7 +88,7 @@ var _lazysizes2 = _interopRequireDefault(_lazysizes);
 
 __webpack_require__(3);
 
-var _Scroll = __webpack_require__(8);
+var _Scroll = __webpack_require__(4);
 
 var _Scroll2 = _interopRequireDefault(_Scroll);
 
@@ -114,6 +114,7 @@ var Site = function () {
     key: 'onReady',
     value: function onReady() {
       _lazysizes2.default.init();
+      this.bindHoneypot();
     }
   }, {
     key: 'fixWidows',
@@ -124,6 +125,52 @@ var Site = function () {
         string = string.replace(/ ([^ ]*)$/, '&nbsp;$1');
         $(this).html(string);
       });
+    }
+  }, {
+    key: 'bindHoneypot',
+    value: function bindHoneypot() {
+      if ($('.honeypot').length && WP.honeypotImages !== undefined) {
+        var $honeypot = $('.honeypot');
+        var handleHoneypot = this.handleHoneypot;
+
+        $honeypot.each(function (index) {
+          $(this).on('click', function () {
+            handleHoneypot(index);
+          });
+        });
+      }
+    }
+  }, {
+    key: 'handleHoneypot',
+    value: function handleHoneypot(index) {
+      var honeypotCount = 0; // how many images have been generated
+
+      var honeypotInterval = setInterval(function () {
+        var $honeypotImage = $('<img src="' + WP.honeypotImages[Object.keys(WP.honeypotImages)[index]] + '" class="honeypot-image" />'); // the image to generate
+
+        $('body').append($honeypotImage); // append the image to body
+
+        // animate display of image
+        $honeypotImage.animate({
+          'opacity': 1,
+          'max-width': '50vw',
+          'max-height': '50vh'
+        }, 250, function () {
+          $(this).animate({
+            'opacity': 0,
+            'max-width': '100vw',
+            'max-height': '100vh'
+          }, 1750, function () {
+            $(this).remove(); // remove this image from DOM
+          });
+        });
+
+        honeypotCount++; // iterate image count
+
+        if (honeypotCount >= 10) {
+          clearInterval(honeypotInterval); // 10 images have been displayed
+        }
+      }, 100); // generate 1 image every 10ms
     }
   }]);
 
@@ -870,11 +917,7 @@ module.exports = function (module) {
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -886,7 +929,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _smoothscrollPolyfill = __webpack_require__(9);
+var _smoothscrollPolyfill = __webpack_require__(5);
 
 var _smoothscrollPolyfill2 = _interopRequireDefault(_smoothscrollPolyfill);
 
@@ -940,7 +983,7 @@ var Scroll = function () {
 exports.default = Scroll;
 
 /***/ }),
-/* 9 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
