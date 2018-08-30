@@ -1,41 +1,78 @@
-class Particle {
+class Dust {
   constructor() {
 
     window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
 
-    this.mouse = {
-      x: 0,
-      y: 0,
-      px: 0,
-      py: 0,
-      down: true // TODO: find a solution for mousedown: true on desktop, mousedown: false on mobile
-    };
+    $(window).resize(this.onResize.bind(this));
 
-    this.resolution = 20; //Width and height of each cell in the grid.
-
-    this.canvas_width = Math.round(window.innerWidth / this.resolution) * this.resolution; //Rounding to nearest 10. Needs to be a multiple of the resolution value below.
-    this.canvas_height = Math.round(window.innerHeight / this.resolution) * this.resolution; //This too.
-
-    this.pen_size = 40; //Radius around the mouse cursor coordinates to reach when stirring
-
-    this.num_cols = this.canvas_width / this.resolution; //This value is the number of columns in the grid.
-    this.num_rows = this.canvas_height / this.resolution; //This is number of rows.
-    this.speck_count = this.canvas_width * 1; //This determines how many particles will be made.
-
-    this.vec_cells = []; //The array that will contain the grid cells
-    this.particles = []; //The array that will contain the particles
+    this.setupProps();
 
     $(document).ready(this.onReady.bind(this));
 
   }
 
-  onReady() {
+  onResize() {
+    clearTimeout(this.resizeTimer);
+
+    this.resizeTimer = setTimeout(this.resizeDone.bind(this), 250);
+  }
+
+  resizeDone() {
+    this.setupProps();
+
     this.init();
+  }
+
+  onReady() {
+    this.bindEvents();
+    this.init();
+  }
+
+  bindEvents() {
+    /*
+    * mousedown and mouseup events are disabled because
+    * mouse is considered already down on desktop
+    * but I'm leaving it here in case we need them later
+    */
+
+    //window.addEventListener("mousedown", this.mouse_down_handler.bind(this));
+    window.addEventListener("touchstart", this.mouse_down_handler.bind(this));
+
+    //window.addEventListener("mouseup", this.mouse_up_handler.bind(this));
+    window.addEventListener("touchend", this.touch_end_handler.bind(this));
+
+    window.addEventListener("mousemove", this.mouse_move_handler.bind(this));
+    window.addEventListener("touchmove", this.touch_move_handler.bind(this));
+  }
+
+  setupProps() {
+    this.mouse = {
+      x: 0,
+      y: 0,
+      px: 0,
+      py: 0,
+      down: true
+    };
+
+    this.resolution = 10; //Width and height of each cell in the grid.
+
+    this.pen_size = 40; //Radius around the mouse cursor coordinates to reach when stirring
+
+    this.canvas_width = Math.round(window.innerWidth / this.resolution) * this.resolution; //Rounding to nearest 10. Needs to be a multiple of the resolution value below.
+    this.canvas_height = Math.round(window.innerHeight / this.resolution) * this.resolution; //This too.
+
+    this.num_cols = this.canvas_width / this.resolution; //This value is the number of columns in the grid.
+    this.num_rows = this.canvas_height / this.resolution; //This is number of rows.
+
+    this.speck_count = this.canvas_width; //This determines how many particles will be made.
+
+    this.vec_cells = []; //The array that will contain the grid cells
+    this.particles = []; //The array that will contain the particles
   }
 
   init() {
     //These lines get the canvas DOM element and canvas context, respectively.
-    this.canvas = document.getElementById("fluid");
+    this.canvas = document.getElementById("dust");
     this.ctx = this.canvas.getContext("2d");
 
     //These two set the width and height of the canvas to the defined values.
@@ -47,13 +84,14 @@ class Particle {
       this.canvas.style.width = this.canvas_width + 'px';
       this.canvas.style.height = this.canvas_height + 'px';
 
-      this.canvas.getContext('2d').scale(2,2);
+      this.canvas.getContext('2d').scale(2, 2);
     } else {
       // Not Retina screen
       this.canvas.width = this.canvas_width;
       this.canvas.height = this.canvas_height;
     }
 
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); //clear
 
     /*
     This loop begins at zero and counts up to the defined number of particles,
@@ -166,29 +204,6 @@ class Particle {
 
       }
     }
-
-
-    /*
-    These lines create triggers that fire when certain events happen. For
-    instance, when you move your mouse, the mouse_move_handler() function
-    will run and will be passed the event object reference into it's "e"
-    variable. Something to note, the mousemove event doesn't necessarily
-    fire for *every* mouse coordinate position; the mouse movement is
-    sampled at a certain rate, meaning that it's checked periodically, and
-    if the mouse has moved, the event is fired and the current coordinates
-    are sent. That's why you'll see large jumps from one pair of coordinates
-    to the next if you move your mouse very fast across the screen. That's
-    also how I measure the mouse's velocity.
-    */
-    // mousedown and mouseup events are disabled because mouse is considered already down on desktop
-    //window.addEventListener("mousedown", this.mouse_down_handler.bind(this));
-    window.addEventListener("touchstart", this.mouse_down_handler.bind(this));
-
-    //window.addEventListener("mouseup", this.mouse_up_handler.bind(this));
-    window.addEventListener("touchend", this.touch_end_handler.bind(this));
-
-    window.addEventListener("mousemove", this.mouse_move_handler.bind(this));
-    window.addEventListener("touchmove", this.touch_move_handler.bind(this));
 
     //When the page is finished loading, run the draw() function.
     this.draw();
@@ -511,20 +526,19 @@ class Particle {
   This function is called whenever the mouse button is pressed. The event object is passed to
   this function when it's called.
   */
-  mouse_down_handler(e) {
-    //e.preventDefault(); //Prevents the default action from happening (e.g. navigation)
+  mouse_down_handler() {
     this.mouse.down = true; //Sets the mouse object's "down" value to true
   }
 
 
   //This function is called whenever the mouse button is released.
   mouse_up_handler() {
-    this.mouse.down = false; // TODO
+    this.mouse.down = false;
   }
 
 
   //This function is called whenever a touch point is removed from the screen.
-  touch_end_handler(e) { // TODO
+  touch_end_handler(e) {
     if (!e.touches) this.mouse.down = false; //If there are no more touches on the screen, sets "down" to false.
   }
 
@@ -569,4 +583,4 @@ class Particle {
 
 }
 
-export default Particle;
+export default Dust;

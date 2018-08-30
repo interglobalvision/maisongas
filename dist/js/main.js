@@ -92,9 +92,9 @@ var _Scroll = __webpack_require__(4);
 
 var _Scroll2 = _interopRequireDefault(_Scroll);
 
-var _Particle = __webpack_require__(6);
+var _Dust = __webpack_require__(11);
 
-var _Particle2 = _interopRequireDefault(_Particle);
+var _Dust2 = _interopRequireDefault(_Dust);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -135,7 +135,7 @@ var Site = function () {
 }();
 
 new Site();
-new _Particle2.default();
+new _Dust2.default();
 new _Scroll2.default();
 
 /***/ }),
@@ -1314,7 +1314,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })();
 
 /***/ }),
-/* 6 */
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1328,47 +1333,88 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Particle = function () {
-  function Particle() {
-    _classCallCheck(this, Particle);
+var Dust = function () {
+  function Dust() {
+    _classCallCheck(this, Dust);
 
     window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
 
-    this.mouse = {
-      x: 0,
-      y: 0,
-      px: 0,
-      py: 0,
-      down: true // TODO: find a solution for mousedown: true on desktop, mousedown: false on mobile
-    };
+    $(window).resize(this.onResize.bind(this));
 
-    this.resolution = 20; //Width and height of each cell in the grid.
-
-    this.canvas_width = Math.round(window.innerWidth / this.resolution) * this.resolution; //Rounding to nearest 10. Needs to be a multiple of the resolution value below.
-    this.canvas_height = Math.round(window.innerHeight / this.resolution) * this.resolution; //This too.
-
-    this.pen_size = 40; //Radius around the mouse cursor coordinates to reach when stirring
-
-    this.num_cols = this.canvas_width / this.resolution; //This value is the number of columns in the grid.
-    this.num_rows = this.canvas_height / this.resolution; //This is number of rows.
-    this.speck_count = this.canvas_width * 1; //This determines how many particles will be made.
-
-    this.vec_cells = []; //The array that will contain the grid cells
-    this.particles = []; //The array that will contain the particles
+    this.setupProps();
 
     $(document).ready(this.onReady.bind(this));
   }
 
-  _createClass(Particle, [{
+  _createClass(Dust, [{
+    key: "onResize",
+    value: function onResize() {
+      clearTimeout(this.resizeTimer);
+
+      this.resizeTimer = setTimeout(this.resizeDone.bind(this), 250);
+    }
+  }, {
+    key: "resizeDone",
+    value: function resizeDone() {
+      this.setupProps();
+
+      this.init();
+    }
+  }, {
     key: "onReady",
     value: function onReady() {
+      this.bindEvents();
       this.init();
+    }
+  }, {
+    key: "bindEvents",
+    value: function bindEvents() {
+      /*
+      * mousedown and mouseup events are disabled because
+      * mouse is considered already down on desktop
+      * but I'm leaving it here in case we need them later
+      */
+
+      //window.addEventListener("mousedown", this.mouse_down_handler.bind(this));
+      window.addEventListener("touchstart", this.mouse_down_handler.bind(this));
+
+      //window.addEventListener("mouseup", this.mouse_up_handler.bind(this));
+      window.addEventListener("touchend", this.touch_end_handler.bind(this));
+
+      window.addEventListener("mousemove", this.mouse_move_handler.bind(this));
+      window.addEventListener("touchmove", this.touch_move_handler.bind(this));
+    }
+  }, {
+    key: "setupProps",
+    value: function setupProps() {
+      this.mouse = {
+        x: 0,
+        y: 0,
+        px: 0,
+        py: 0,
+        down: true
+      };
+
+      this.resolution = 10; //Width and height of each cell in the grid.
+
+      this.pen_size = 40; //Radius around the mouse cursor coordinates to reach when stirring
+
+      this.canvas_width = Math.round(window.innerWidth / this.resolution) * this.resolution; //Rounding to nearest 10. Needs to be a multiple of the resolution value below.
+      this.canvas_height = Math.round(window.innerHeight / this.resolution) * this.resolution; //This too.
+
+      this.num_cols = this.canvas_width / this.resolution; //This value is the number of columns in the grid.
+      this.num_rows = this.canvas_height / this.resolution; //This is number of rows.
+
+      this.speck_count = this.canvas_width; //This determines how many particles will be made.
+
+      this.vec_cells = []; //The array that will contain the grid cells
+      this.particles = []; //The array that will contain the particles
     }
   }, {
     key: "init",
     value: function init() {
       //These lines get the canvas DOM element and canvas context, respectively.
-      this.canvas = document.getElementById("fluid");
+      this.canvas = document.getElementById("dust");
       this.ctx = this.canvas.getContext("2d");
 
       //These two set the width and height of the canvas to the defined values.
@@ -1386,6 +1432,8 @@ var Particle = function () {
         this.canvas.width = this.canvas_width;
         this.canvas.height = this.canvas_height;
       }
+
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); //clear
 
       /*
       This loop begins at zero and counts up to the defined number of particles,
@@ -1490,28 +1538,6 @@ var Particle = function () {
           up_right.down_left = this.vec_cells[col][row];
         }
       }
-
-      /*
-      These lines create triggers that fire when certain events happen. For
-      instance, when you move your mouse, the mouse_move_handler() function
-      will run and will be passed the event object reference into it's "e"
-      variable. Something to note, the mousemove event doesn't necessarily
-      fire for *every* mouse coordinate position; the mouse movement is
-      sampled at a certain rate, meaning that it's checked periodically, and
-      if the mouse has moved, the event is fired and the current coordinates
-      are sent. That's why you'll see large jumps from one pair of coordinates
-      to the next if you move your mouse very fast across the screen. That's
-      also how I measure the mouse's velocity.
-      */
-      // mousedown and mouseup events are disabled because mouse is considered already down on desktop
-      //window.addEventListener("mousedown", this.mouse_down_handler.bind(this));
-      window.addEventListener("touchstart", this.mouse_down_handler.bind(this));
-
-      //window.addEventListener("mouseup", this.mouse_up_handler.bind(this));
-      window.addEventListener("touchend", this.touch_end_handler.bind(this));
-
-      window.addEventListener("mousemove", this.mouse_move_handler.bind(this));
-      window.addEventListener("touchmove", this.touch_move_handler.bind(this));
 
       //When the page is finished loading, run the draw() function.
       this.draw();
@@ -1827,8 +1853,7 @@ var Particle = function () {
 
   }, {
     key: "mouse_down_handler",
-    value: function mouse_down_handler(e) {
-      //e.preventDefault(); //Prevents the default action from happening (e.g. navigation)
+    value: function mouse_down_handler() {
       this.mouse.down = true; //Sets the mouse object's "down" value to true
     }
 
@@ -1837,7 +1862,7 @@ var Particle = function () {
   }, {
     key: "mouse_up_handler",
     value: function mouse_up_handler() {
-      this.mouse.down = false; // TODO
+      this.mouse.down = false;
     }
 
     //This function is called whenever a touch point is removed from the screen.
@@ -1845,7 +1870,6 @@ var Particle = function () {
   }, {
     key: "touch_end_handler",
     value: function touch_end_handler(e) {
-      // TODO
       if (!e.touches) this.mouse.down = false; //If there are no more touches on the screen, sets "down" to false.
     }
 
@@ -1894,10 +1918,10 @@ var Particle = function () {
     }
   }]);
 
-  return Particle;
+  return Dust;
 }();
 
-exports.default = Particle;
+exports.default = Dust;
 
 /***/ })
 /******/ ]);
