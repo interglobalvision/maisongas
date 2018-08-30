@@ -14,13 +14,13 @@ class Particle {
     this.canvas_width = Math.round(window.innerWidth / 10) * 10; //Rounding to nearest 10. Needs to be a multiple of the resolution value below.
     this.canvas_height = Math.round(window.innerHeight / 10) * 10; //This too.
 
-    this.resolution = 10; //Width and height of each cell in the grid.
+    this.resolution = 20; //Width and height of each cell in the grid.
 
     this.pen_size = 40; //Radius around the mouse cursor coordinates to reach when stirring
 
     this.num_cols = this.canvas_width / this.resolution; //This value is the number of columns in the grid.
     this.num_rows = this.canvas_height / this.resolution; //This is number of rows.
-    this.speck_count = this.canvas_width; //This determines how many particles will be made.
+    this.speck_count = this.canvas_width * 1; //This determines how many particles will be made.
 
     this.vec_cells = []; //The array that will contain the grid cells
     this.particles = []; //The array that will contain the particles
@@ -352,7 +352,7 @@ class Particle {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     //This sets the color to draw with.
-    this.ctx.strokeStyle = "#000000";
+    this.ctx.strokeStyle = "#999999";
 
     //This calls the function to update the particle positions.
     this.update_particle();
