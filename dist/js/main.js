@@ -1362,7 +1362,6 @@ var Particle = function () {
   _createClass(Particle, [{
     key: "onReady",
     value: function onReady() {
-      console.log(document);
       this.init();
     }
   }, {
@@ -1513,7 +1512,6 @@ var Particle = function () {
       window.addEventListener("mousemove", this.mouse_move_handler.bind(this));
       window.addEventListener("touchmove", this.touch_move_handler.bind(this));
 
-      console.log('draw');
       //When the page is finished loading, run the draw() function.
       this.draw();
     }
