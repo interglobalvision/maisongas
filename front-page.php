@@ -18,6 +18,7 @@ if (have_posts()) {
     $stockists = get_post_meta($post->ID, '_igv_home_stockists', true);
     $stockists_image = get_post_meta($post->ID, '_igv_home_stockists_image_id', true);
     $editions_note = get_post_meta($post->ID, '_igv_home_editions_note', true);
+    $subheading = get_post_meta($post->ID, '_igv_home_subheading', true);
 ?>
 
     <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
@@ -35,12 +36,17 @@ if (have_posts()) {
 
 <?php
     }
+
+    if (!empty($subheading)) {
 ?>
         <div class="grid-row text-align-center font-uppercase">
           <div class="grid-item item-s-12">
-            <span>Made in California</span>
+            <span><?php echo $subheading; ?></span>
           </div>
         </div>
+<?php
+    }
+?>
       </section>
 
       <section id="about" class="margin-bottom-large">

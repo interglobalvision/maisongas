@@ -64,6 +64,12 @@ function igv_cmb_metaboxes() {
     ) );
 
     $home_metabox->add_field( array(
+      'name'       => esc_html__( 'Sub-heading', 'cmb2' ),
+      'id'         => $prefix . 'home_subheading',
+      'type'       => 'text',
+    ) );
+
+    $home_metabox->add_field( array(
       'name'       => esc_html__( 'Text 1', 'cmb2' ),
       'id'         => $prefix . 'home_text_1',
       'type'       => 'wysiwyg',
