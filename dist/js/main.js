@@ -1342,10 +1342,10 @@ var Particle = function () {
       down: true // TODO: find a solution for mousedown: true on desktop, mousedown: false on mobile
     };
 
-    this.canvas_width = Math.round(window.innerWidth / 10) * 10; //Rounding to nearest 10. Needs to be a multiple of the resolution value below.
-    this.canvas_height = Math.round(window.innerHeight / 10) * 10; //This too.
-
     this.resolution = 20; //Width and height of each cell in the grid.
+
+    this.canvas_width = Math.round(window.innerWidth / this.resolution) * this.resolution; //Rounding to nearest 10. Needs to be a multiple of the resolution value below.
+    this.canvas_height = Math.round(window.innerHeight / this.resolution) * this.resolution; //This too.
 
     this.pen_size = 40; //Radius around the mouse cursor coordinates to reach when stirring
 
