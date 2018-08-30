@@ -72,7 +72,11 @@ function igv_cmb_metaboxes() {
     $home_metabox->add_field( array(
       'name'       => esc_html__( 'Text 1', 'cmb2' ),
       'id'         => $prefix . 'home_text_1',
-      'type'       => 'textarea',
+      'type'       => 'wysiwyg',
+      'options' => array(
+        'media_buttons' => false, // show insert/upload button(s)
+        'textarea_rows' => get_option('default_post_edit_rows', 5), // rows="..."
+      ),
     ) );
 
     $home_metabox->add_field( array(
@@ -110,7 +114,11 @@ function igv_cmb_metaboxes() {
     $home_metabox->add_field( array(
       'name'       => esc_html__( 'Text 2', 'cmb2' ),
       'id'         => $prefix . 'home_text_2',
-      'type'       => 'textarea',
+      'type'       => 'wysiwyg',
+      'options' => array(
+        'media_buttons' => false, // show insert/upload button(s)
+        'textarea_rows' => get_option('default_post_edit_rows', 5), // rows="..."
+      ),
     ) );
 
     $stockists_group = $home_metabox->add_field( array(
