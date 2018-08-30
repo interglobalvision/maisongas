@@ -34,9 +34,27 @@ if (have_posts()) {
 
 <?php
     }
+
+    $args = array(
+      'post_type' => array( 'edition' ),
+      'posts_per_page' => '-1',
+      'orderby' => 'meta_value_number',
+      'meta_key' => '_igv_edition_number',
+    );
+
+    $edition_query = new WP_Query( $args );
 ?>
-        <div class="grid-row justify-center font-uppercase">
-          <div class="grid-item">
+        <div class="grid-row text-align-center font-uppercase">
+<?php
+    if ( $edition_query->have_posts() ) {
+?>
+          <div class="grid-item item-s-12">
+            <span>Editions </span><span class="font-size-small">1-12</span>
+          </div>
+<?php
+    }
+?>
+          <div class="grid-item item-s-12">
             <span>Los Angeles</span>
           </div>
         </div>
@@ -93,15 +111,6 @@ if (have_posts()) {
     /*
     * EDITIONS
     */
-
-    $args = array(
-      'post_type' => array( 'edition' ),
-      'posts_per_page' => '-1',
-      'orderby' => 'meta_value_number',
-      'meta_key' => '_igv_edition_number',
-    );
-
-    $edition_query = new WP_Query( $args );
 
     if ( $edition_query->have_posts() ) {
 ?>
