@@ -88,11 +88,11 @@ var _lazysizes2 = _interopRequireDefault(_lazysizes);
 
 __webpack_require__(3);
 
-var _Scroll = __webpack_require__(8);
+var _Scroll = __webpack_require__(4);
 
 var _Scroll2 = _interopRequireDefault(_Scroll);
 
-var _Particle = __webpack_require__(11);
+var _Particle = __webpack_require__(6);
 
 var _Particle2 = _interopRequireDefault(_Particle);
 
@@ -875,11 +875,7 @@ module.exports = function (module) {
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -891,7 +887,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _smoothscrollPolyfill = __webpack_require__(9);
+var _smoothscrollPolyfill = __webpack_require__(5);
 
 var _smoothscrollPolyfill2 = _interopRequireDefault(_smoothscrollPolyfill);
 
@@ -945,7 +941,7 @@ var Scroll = function () {
 exports.default = Scroll;
 
 /***/ }),
-/* 9 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1318,8 +1314,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })();
 
 /***/ }),
-/* 10 */,
-/* 11 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1350,13 +1345,13 @@ var Particle = function () {
     this.canvas_width = Math.round(window.innerWidth / 10) * 10; //Rounding to nearest 10. Needs to be a multiple of the resolution value below.
     this.canvas_height = Math.round(window.innerHeight / 10) * 10; //This too.
 
-    this.resolution = 20; //Width and height of each cell in the grid.
+    this.resolution = 10; //Width and height of each cell in the grid.
 
     this.pen_size = 40; //Radius around the mouse cursor coordinates to reach when stirring
 
     this.num_cols = this.canvas_width / this.resolution; //This value is the number of columns in the grid.
     this.num_rows = this.canvas_height / this.resolution; //This is number of rows.
-    this.speck_count = 2000; //This determines how many particles will be made.
+    this.speck_count = this.canvas_width; //This determines how many particles will be made.
 
     this.vec_cells = []; //The array that will contain the grid cells
     this.particles = []; //The array that will contain the particles
@@ -1378,8 +1373,20 @@ var Particle = function () {
       this.ctx = this.canvas.getContext("2d");
 
       //These two set the width and height of the canvas to the defined values.
-      this.canvas.width = this.canvas_width;
-      this.canvas.height = this.canvas_height;
+      if (window.devicePixelRatio > 1) {
+        // Retina screen
+        this.canvas.width = this.canvas_width * 2;
+        this.canvas.height = this.canvas_height * 2;
+
+        this.canvas.style.width = this.canvas_width + 'px';
+        this.canvas.style.height = this.canvas_height + 'px';
+
+        this.canvas.getContext('2d').scale(2, 2);
+      } else {
+        // Not Retina screen
+        this.canvas.width = this.canvas_width;
+        this.canvas.height = this.canvas_height;
+      }
 
       /*
       This loop begins at zero and counts up to the defined number of particles,

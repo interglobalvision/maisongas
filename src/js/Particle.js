@@ -14,13 +14,13 @@ class Particle {
     this.canvas_width = Math.round(window.innerWidth / 10) * 10; //Rounding to nearest 10. Needs to be a multiple of the resolution value below.
     this.canvas_height = Math.round(window.innerHeight / 10) * 10; //This too.
 
-    this.resolution = 20; //Width and height of each cell in the grid.
+    this.resolution = 10; //Width and height of each cell in the grid.
 
     this.pen_size = 40; //Radius around the mouse cursor coordinates to reach when stirring
 
     this.num_cols = this.canvas_width / this.resolution; //This value is the number of columns in the grid.
     this.num_rows = this.canvas_height / this.resolution; //This is number of rows.
-    this.speck_count = 2000; //This determines how many particles will be made.
+    this.speck_count = this.canvas_width; //This determines how many particles will be made.
 
     this.vec_cells = []; //The array that will contain the grid cells
     this.particles = []; //The array that will contain the particles
@@ -40,8 +40,21 @@ class Particle {
     this.ctx = this.canvas.getContext("2d");
 
     //These two set the width and height of the canvas to the defined values.
-    this.canvas.width = this.canvas_width;
-    this.canvas.height = this.canvas_height;
+    if (window.devicePixelRatio > 1) {
+      // Retina screen
+      this.canvas.width = this.canvas_width * 2;
+      this.canvas.height = this.canvas_height * 2;
+
+      this.canvas.style.width = this.canvas_width + 'px';
+      this.canvas.style.height = this.canvas_height + 'px';
+
+      this.canvas.getContext('2d').scale(2,2);
+    } else {
+      // Not Retina screen
+      this.canvas.width = this.canvas_width;
+      this.canvas.height = this.canvas_height;
+    }
+
 
     /*
     This loop begins at zero and counts up to the defined number of particles,
