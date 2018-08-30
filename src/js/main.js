@@ -9,6 +9,7 @@ import '../styl/site.styl';
 
 // Import components
 import Scroll from './Scroll';
+import Fluid from './Fluid';
 
 class Site {
   constructor() {
