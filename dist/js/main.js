@@ -92,9 +92,9 @@ var _Scroll = __webpack_require__(8);
 
 var _Scroll2 = _interopRequireDefault(_Scroll);
 
-var _Fluid = __webpack_require__(10);
+var _Particle = __webpack_require__(11);
 
-var _Fluid2 = _interopRequireDefault(_Fluid);
+var _Particle2 = _interopRequireDefault(_Particle);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -135,7 +135,7 @@ var Site = function () {
 }();
 
 new Site();
-new _Fluid2.default();
+new _Particle2.default();
 new _Scroll2.default();
 
 /***/ }),
@@ -1318,7 +1318,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })();
 
 /***/ }),
-/* 10 */
+/* 10 */,
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1332,9 +1333,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Fluid = function () {
-  function Fluid() {
-    _classCallCheck(this, Fluid);
+var Particle = function () {
+  function Particle() {
+    _classCallCheck(this, Particle);
 
     window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
 
@@ -1363,7 +1364,7 @@ var Fluid = function () {
     $(document).ready(this.onReady.bind(this));
   }
 
-  _createClass(Fluid, [{
+  _createClass(Particle, [{
     key: "onReady",
     value: function onReady() {
       console.log(document);
@@ -1885,10 +1886,10 @@ var Fluid = function () {
     }
   }]);
 
-  return Fluid;
+  return Particle;
 }();
 
-exports.default = Fluid;
+exports.default = Particle;
 
 /***/ })
 /******/ ]);

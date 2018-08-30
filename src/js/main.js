@@ -9,7 +9,7 @@ import '../styl/site.styl';
 
 // Import components
 import Scroll from './Scroll';
-import Fluid from './Fluid';
+import Particle from './Particle';
 
 class Site {
   constructor() {
@@ -41,5 +41,5 @@ class Site {
 }
 
 new Site();
-new Fluid();
+new Particle();
 new Scroll();

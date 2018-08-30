@@ -1,4 +1,4 @@
-class Fluid {
+class Particle {
   constructor() {
 
     window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
@@ -555,4 +555,4 @@ class Fluid {
 
 }
 
-export default Fluid;
+export default Particle;
