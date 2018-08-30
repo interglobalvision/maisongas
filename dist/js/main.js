@@ -1395,7 +1395,7 @@ var Dust = function () {
         down: true
       };
 
-      this.resolution = 15; //Width and height of each cell in the grid.
+      this.resolution = 15; //Width and height of each cell in the grid. Lower number for higher res. 10 is about the best without slowing down browser too much.
 
       this.pen_size = 40; //Radius around the mouse cursor coordinates to reach when stirring
 
