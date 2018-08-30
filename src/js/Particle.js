@@ -180,10 +180,10 @@ class Particle {
     to the next if you move your mouse very fast across the screen. That's
     also how I measure the mouse's velocity.
     */
-    window.addEventListener("mousedown", this.mouse_down_handler.bind(this));
-    window.addEventListener("touchstart", this.mouse_down_handler);
+    //window.addEventListener("mousedown", this.mouse_down_handler.bind(this));
+    window.addEventListener("touchstart", this.mouse_down_handler.bind(this));
 
-    window.addEventListener("mouseup", this.mouse_up_handler.bind(this));
+    //window.addEventListener("mouseup", this.mouse_up_handler.bind(this));
     window.addEventListener("touchend", this.touch_end_handler.bind(this));
 
     window.addEventListener("mousemove", this.mouse_move_handler.bind(this));
@@ -511,14 +511,14 @@ class Particle {
   this function when it's called.
   */
   mouse_down_handler(e) {
-    e.preventDefault(); //Prevents the default action from happening (e.g. navigation)
+    //e.preventDefault(); //Prevents the default action from happening (e.g. navigation)
     this.mouse.down = true; //Sets the mouse object's "down" value to true
   }
 
 
   //This function is called whenever the mouse button is released.
   mouse_up_handler() {
-    //this.mouse.down = false; // TODO
+    this.mouse.down = false; // TODO
   }
 
 
@@ -560,8 +560,10 @@ class Particle {
     And this sets the mouse coordinates to where the first touch is. Since we're using pageX
     and pageY, we need to subtract the top and left offset of the canvas so the values are correct.
     */
-    this.mouse.x = e.touches[0].pageX - rect.left;
-    this.mouse.y = e.touches[0].pageY - rect.top;
+    //this.mouse.x = e.touches[0].pageX - rect.left;
+    //this.mouse.y = e.touches[0].pageY - rect.top;
+    this.mouse.x = e.touches[0].clientX;
+    this.mouse.y = e.touches[0].clientY;
   }
 
 }
