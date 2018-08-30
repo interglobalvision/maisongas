@@ -5,12 +5,12 @@ $margin-tiny = ($gutter / 2)
 $margin-small = ($gutter)
 $margin-basic = ($gutter * 2)
 $margin-mid = ($gutter * 4)
-$margin-large = ($gutter * 8)
+$margin-large = ($gutter * 6)
 
 $font-size-basic = 16px
 $font-size-small = $font-size-basic * .5
 $font-size-mid = $font-size-basic * 1.5
-$font-size-large = $font-size-basic * 3
+$font-size-large = $font-size-basic * 4
 
 grid-maker(100%, $gutter, s)
 
@@ -65,3 +65,10 @@ p
 
 #site-title
   order: 3
+
+// ******************************************************
+
+// TOP
+
+section#top
+  margin-top: -($margin-mid)

@@ -78,14 +78,14 @@ if (have_posts()) {
         <?php
           if (!empty($middle_image_1)) {
         ?>
-          <div class="grid-item item-s-12 item-m-6 text-align-center">
+          <div class="grid-item item-s-12 item-m-6 text-align-center margin-bottom-mid">
             <?php echo wp_get_attachment_image($middle_image_1, 'height-900'); ?>
           </div>
         <?php
           }
           if (!empty($middle_image_2)) {
         ?>
-          <div class="grid-item item-s-12 item-m-6 text-align-center">
+          <div class="grid-item item-s-12 item-m-6 text-align-center margin-bottom-mid">
             <?php echo wp_get_attachment_image($middle_image_2, 'height-900'); ?>
           </div>
         <?php
@@ -96,7 +96,7 @@ if (have_posts()) {
     }
     if (!empty($text_2)) {
 ?>
-        <div class="grid-row margin-top-mid">
+        <div class="grid-row margin-top-small">
           <div class="grid-item font-size-mid">
             <?php echo apply_filters('the_content', $text_2); ?>
           </div>
@@ -122,7 +122,7 @@ if (have_posts()) {
         $edition_number = get_post_meta($post->ID, '_igv_edition_number', true);
 ?>
         <div class="grid-row">
-          <div class="grid-item item-s-12 item-m-6 no-gutter">
+          <div class="grid-item item-s-12 item-m-6 no-gutter-image-holder margin-bottom-small">
             <?php echo the_post_thumbnail('height-900'); ?>
           </div>
           <div class="grid-item item-s-12 item-m-6">
@@ -164,7 +164,7 @@ if (have_posts()) {
             }
           ?>
           </div>
-          <div class="grid-item item-s-12 item-m-4 no-gutter align-self-end margin-top-mid">
+          <div class="grid-item item-s-12 item-m-4 no-gutter-image-holder align-self-end margin-top-mid">
             <?php echo wp_get_attachment_image($stockists_image, 'width-640'); ?>
           </div>
         </div>

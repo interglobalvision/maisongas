@@ -7,12 +7,12 @@
   $margin-small = ($gutter)
   $margin-basic = ($gutter * 2)
   $margin-mid = ($gutter * 4)
-  $margin-large = ($gutter * 8)
+  $margin-large = ($gutter * 6)
 
   $font-size-basic = 18px
   $font-size-small = $font-size-basic * .5
   $font-size-mid = $font-size-basic * 1.5
-  $font-size-large = $font-size-basic * 3
+  $font-size-large = $font-size-basic * 4
 
   grid-maker(100%, $gutter, m)
 
@@ -22,6 +22,10 @@
 
   .mobile-only
     display: none !important
+
+  .no-gutter-image-holder
+    padding-left: 0
+    padding-right: 0
 
   // ******************************************************
 
@@ -37,3 +41,10 @@
 
   #site-title
     order: 2
+
+  // ******************************************************
+
+  // TOP
+
+  section#top
+    margin-top: -($margin-mid)
