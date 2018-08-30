@@ -40,4 +40,5 @@ class Site {
 }
 
 new Site();
+new Fluid();
 new Scroll();

@@ -131,6 +131,7 @@ var Site = function () {
 }();
 
 new Site();
+new Fluid();
 new _Scroll2.default();
 
 /***/ }),
