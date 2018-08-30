@@ -105,6 +105,7 @@ function igv_cmb_metaboxes() {
 
     $home_metabox->add_field( array(
       'name'       => esc_html__( 'Honeypot Images', 'cmb2' ),
+      'description' => esc_html__( '<span class="honeypot">your text</span>', 'cmb2' ),
       'id'         => $prefix . 'home_honeypot_images',
       'type'       => 'file_list',
       'preview_size' => array( 150, 150 ),
