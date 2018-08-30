@@ -1395,7 +1395,7 @@ var Dust = function () {
         down: true
       };
 
-      this.resolution = 10; //Width and height of each cell in the grid.
+      this.resolution = 15; //Width and height of each cell in the grid.
 
       this.pen_size = 40; //Radius around the mouse cursor coordinates to reach when stirring
 
