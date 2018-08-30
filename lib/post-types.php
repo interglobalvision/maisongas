@@ -5,8 +5,8 @@ function add_menu_icons_styles(){
 ?>
 
 <style>
-#menu-posts-project .dashicons-admin-post:before {
-    content: '\f319';
+#menu-posts-edition .dashicons-admin-post:before {
+    content: '\f330';
 }
 </style>
 
@@ -16,23 +16,23 @@ add_action( 'admin_head', 'add_menu_icons_styles' );
 
 
 //Register Custom Post Types
-add_action( 'init', 'register_cpt_project' );
+add_action( 'init', 'register_cpt_edition' );
 
-function register_cpt_project() {
+function register_cpt_edition() {
 
   $labels = array(
-    'name' => _x( 'Projects', 'project' ),
-    'singular_name' => _x( 'Project', 'project' ),
-    'add_new' => _x( 'Add New', 'project' ),
-    'add_new_item' => _x( 'Add New Project', 'project' ),
-    'edit_item' => _x( 'Edit Project', 'project' ),
-    'new_item' => _x( 'New Project', 'project' ),
-    'view_item' => _x( 'View Project', 'project' ),
-    'search_items' => _x( 'Search Projects', 'project' ),
-    'not_found' => _x( 'No projects found', 'project' ),
-    'not_found_in_trash' => _x( 'No projects found in Trash', 'project' ),
-    'parent_item_colon' => _x( 'Parent Project:', 'project' ),
-    'menu_name' => _x( 'Projects', 'project' ),
+    'name' => _x( 'Editions', 'edition' ),
+    'singular_name' => _x( 'Edition', 'edition' ),
+    'add_new' => _x( 'Add New', 'edition' ),
+    'add_new_item' => _x( 'Add New Edition', 'edition' ),
+    'edit_item' => _x( 'Edit Edition', 'edition' ),
+    'new_item' => _x( 'New Edition', 'edition' ),
+    'view_item' => _x( 'View Edition', 'edition' ),
+    'search_items' => _x( 'Search Editions', 'edition' ),
+    'not_found' => _x( 'No editions found', 'edition' ),
+    'not_found_in_trash' => _x( 'No editions found in Trash', 'edition' ),
+    'parent_item_colon' => _x( 'Parent Edition:', 'edition' ),
+    'menu_name' => _x( 'Editions', 'edition' ),
   );
 
   $args = array(
@@ -56,5 +56,5 @@ function register_cpt_project() {
     'capability_type' => 'post'
   );
 
-  register_post_type( 'project', $args );
+  register_post_type( 'edition', $args );
 }

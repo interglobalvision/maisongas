@@ -9,17 +9,16 @@
   $margin-mid = ($gutter * 4)
   $margin-large = ($gutter * 8)
 
-  $font-size-basic = 42px
-  $font-size-mid = 64px
-  $font-size-large = 120px
+  $font-size-basic = 24px
+  $font-size-small = $font-size-basic * .5
+  $font-size-mid = $font-size-basic * 1.5
+  $font-size-large = $font-size-basic * 3
 
   grid-maker(100%, $gutter, l)
 
   space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
-  font-sizes($font-size-basic, false, $font-size-large, $font-size-mid)
+  font-sizes($font-size-basic, false, $font-size-large, $font-size-mid, $font-size-small)
 
   .desktop-only
     display: initial !important
-
-  
