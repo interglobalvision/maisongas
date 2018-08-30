@@ -39,21 +39,28 @@ class Site {
   }
 
   bindHoneypot() {
-    const $honeypot = $('#honeypot');
+    if ($('.honeypot').length && WP.honeypotImages !== undefined) {
+      const $honeypot = $('.honeypot');
+      let handleHoneypot = this.handleHoneypot;
 
-    $honeypot.on('click', this.handleHoneypot.bind(this));
+      $honeypot.each(function(index) {
+        $(this).on('click', function() {
+          handleHoneypot(index);
+        });
+      });
+    }
+
   }
 
-  handleHoneypot() {
-    let honeypotCount = 0;
+  handleHoneypot(index) {
+    let honeypotCount = 0; // how many images have been generated
+
     const honeypotInterval = setInterval(() => {
-      // oh well hello
-      const $honeypotImage = $('<img src="' + WP.themeUrl + '/dist/img/honeypot.jpg" class="honeypot" />');
+      const $honeypotImage = $('<img src="' + WP.honeypotImages[Object.keys(WP.honeypotImages)[index]] + '" class="honeypot-image" />'); // the image to generate
 
-      // oooh that's sweet
-      $('body').append($honeypotImage);
+      $('body').append($honeypotImage); // append the image to body
 
-      // ooh yeeaah
+      // animate display of image
       $honeypotImage.animate({
         'opacity': 1,
         'max-width': '50vw',
@@ -63,17 +70,17 @@ class Site {
           'opacity': 0,
           'max-width': '100vw',
           'max-height': '100vh'
-        }, 1750);
+        }, 1750, function() {
+          $(this).remove(); // remove this image from DOM
+        });
       });
 
-      // getting sweeter...
-      honeypotCount++;
+      honeypotCount++; // iterate image count
 
       if (honeypotCount >= 10) {
-        // ooooooh too sweet
-        clearInterval(honeypotInterval);
+        clearInterval(honeypotInterval); // 10 images have been displayed
       }
-    }, 100)
+    }, 100) // generate 1 image every 10ms
 
   }
 }
