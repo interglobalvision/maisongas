@@ -112,6 +112,12 @@ function igv_cmb_metaboxes() {
       'query_args' => array( 'type' => 'image' ),
     ) );
 
+    $home_metabox->add_field( array(
+      'name'       => esc_html__( 'Editions Note', 'cmb2' ),
+      'id'         => $prefix . 'home_editions_note',
+      'type'       => 'textarea_small',
+    ) );
+
     $stockists_group = $home_metabox->add_field( array(
       'id'          => $prefix . 'home_stockists',
       'type'        => 'group',
