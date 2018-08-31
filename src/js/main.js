@@ -57,7 +57,7 @@ class Site {
     let honeypotCount = 0; // how many images have been generated
 
     const honeypotInterval = setInterval(() => {
-      const $honeypotImage = $('<img src="' + WP.honeypotImages[Object.keys(WP.honeypotImages)[index]] + '" class="honeypot-image" />'); // the image to generate
+      const $honeypotImage = $('<img src="' + WP.honeypotImages[index] + '" class="honeypot-image" />'); // the image to generate
 
       $('body').append($honeypotImage); // append the image to body
 

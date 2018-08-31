@@ -7,12 +7,12 @@
   $margin-small = ($gutter)
   $margin-basic = ($gutter * 2)
   $margin-mid = ($gutter * 4)
-  $margin-large = ($gutter * 8)
+  $margin-large = ($gutter * 6)
 
   $font-size-basic = 24px
   $font-size-small = $font-size-basic * .5
   $font-size-mid = $font-size-basic * 1.5
-  $font-size-large = $font-size-basic * 3
+  $font-size-large = $font-size-basic * 4
 
   grid-maker(100%, $gutter, l)
 
@@ -22,3 +22,10 @@
 
   .desktop-only
     display: initial !important
+
+  // ******************************************************
+
+  // TOP
+
+  section#top
+    margin-top: -($margin-mid)
