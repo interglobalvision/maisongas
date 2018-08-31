@@ -92,7 +92,7 @@ var _Scroll = __webpack_require__(4);
 
 var _Scroll2 = _interopRequireDefault(_Scroll);
 
-var _Dust = __webpack_require__(11);
+var _Dust = __webpack_require__(6);
 
 var _Dust2 = _interopRequireDefault(_Dust);
 
@@ -1361,12 +1361,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 })();
 
 /***/ }),
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1750,7 +1745,7 @@ var Dust = function () {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
       //This sets the color to draw with.
-      this.ctx.strokeStyle = "#999999";
+      this.ctx.strokeStyle = "#555555";
 
       //This calls the function to update the particle positions.
       this.update_particle();
