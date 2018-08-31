@@ -176,6 +176,20 @@ if (have_posts()) {
 
     </article>
 
+    <div id="honeypot-loader">
+      <?php
+        // this just loads the honeypot images so they're ready when triggered
+
+        $honeypotImages = get_post_meta($post->ID, '_igv_home_honeypot_images', true);
+
+        if (!empty($honeypotImages)) {
+          foreach($honeypotImages as $key => $value) {
+            echo '<img src="' . wp_get_attachment_image_url($key, 'height-900') . '" />';
+          }
+        }
+      ?>
+    </div>
+
 <?php
   }
 }
