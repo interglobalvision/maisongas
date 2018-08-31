@@ -64,6 +64,12 @@ function igv_cmb_metaboxes() {
     ) );
 
     $home_metabox->add_field( array(
+      'name'       => esc_html__( 'Sub-heading', 'cmb2' ),
+      'id'         => $prefix . 'home_subheading',
+      'type'       => 'text',
+    ) );
+
+    $home_metabox->add_field( array(
       'name'       => esc_html__( 'Text 1', 'cmb2' ),
       'id'         => $prefix . 'home_text_1',
       'type'       => 'wysiwyg',
@@ -110,6 +116,12 @@ function igv_cmb_metaboxes() {
       'type'       => 'file_list',
       'preview_size' => array( 150, 150 ),
       'query_args' => array( 'type' => 'image' ),
+    ) );
+
+    $home_metabox->add_field( array(
+      'name'       => esc_html__( 'Editions Note', 'cmb2' ),
+      'id'         => $prefix . 'home_editions_note',
+      'type'       => 'textarea_small',
     ) );
 
     $stockists_group = $home_metabox->add_field( array(

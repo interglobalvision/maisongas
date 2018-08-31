@@ -17,6 +17,8 @@ if (have_posts()) {
     $text_2 = get_post_meta($post->ID, '_igv_home_text_2', true);
     $stockists = get_post_meta($post->ID, '_igv_home_stockists', true);
     $stockists_image = get_post_meta($post->ID, '_igv_home_stockists_image_id', true);
+    $editions_note = get_post_meta($post->ID, '_igv_home_editions_note', true);
+    $subheading = get_post_meta($post->ID, '_igv_home_subheading', true);
 ?>
 
     <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
@@ -35,29 +37,16 @@ if (have_posts()) {
 <?php
     }
 
-    $args = array(
-      'post_type' => array( 'edition' ),
-      'posts_per_page' => '-1',
-      'orderby' => 'meta_value_number',
-      'meta_key' => '_igv_edition_number',
-    );
-
-    $edition_query = new WP_Query( $args );
+    if (!empty($subheading)) {
 ?>
         <div class="grid-row text-align-center font-uppercase">
-<?php
-    if ( $edition_query->have_posts() ) {
-?>
           <div class="grid-item item-s-12">
-            <span>Editions </span><span class="font-size-small">1-12</span>
+            <span><?php echo $subheading; ?></span>
           </div>
+        </div>
 <?php
     }
 ?>
-          <div class="grid-item item-s-12">
-            <span>Los Angeles</span>
-          </div>
-        </div>
       </section>
 
       <section id="about" class="margin-bottom-large">
@@ -112,10 +101,29 @@ if (have_posts()) {
     * EDITIONS
     */
 
+    $args = array(
+      'post_type' => array( 'edition' ),
+      'posts_per_page' => '-1',
+      'orderby' => 'meta_value_number',
+      'meta_key' => '_igv_edition_number',
+    );
+
+    $edition_query = new WP_Query( $args );
+
     if ( $edition_query->have_posts() ) {
 ?>
-      <section id="editions" class="margin-bottom-large font-uppercase">
+      <section id="editions" class="margin-bottom-large">
 <?php
+      if (!empty($editions_note)) {
+?>
+        <div class="grid-row">
+          <div class="grid-item item-s-12 item-m-6 font-size-small">
+            <?php echo apply_filters('the_content', $editions_note); ?>
+          </div>
+        </div>
+<?php
+      }
+
       while ( $edition_query->have_posts() ) {
         $edition_query->the_post();
 
@@ -158,7 +166,7 @@ if (have_posts()) {
           ?>
             <div class="grid-item item-s-12 item-m-6">
               <div><span><?php echo $shop['name']; ?></span></div>
-              <div class="no-hyphens"><?php echo !empty($shop['map_url']) ? '<a href="' . $shop['map_url'] . '">' . apply_filters('the_content', $shop['address']) . '</a>' : apply_filters('the_content', $shop['address']); ?></div>
+              <div class="u-inline-block"><?php echo !empty($shop['map_url']) ? '<a href="' . $shop['map_url'] . '">' . apply_filters('the_content', $shop['address']) . '</a>' : apply_filters('the_content', $shop['address']); ?></div>
             </div>
           <?php
             }
