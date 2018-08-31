@@ -166,7 +166,7 @@ if (have_posts()) {
           ?>
             <div class="grid-item item-s-12 item-m-6">
               <div><span><?php echo $shop['name']; ?></span></div>
-              <div><?php echo !empty($shop['map_url']) ? '<a href="' . $shop['map_url'] . '">' . apply_filters('the_content', $shop['address']) . '</a>' : apply_filters('the_content', $shop['address']); ?></div>
+              <div class="u-inline-block"><?php echo !empty($shop['map_url']) ? '<a href="' . $shop['map_url'] . '">' . apply_filters('the_content', $shop['address']) . '</a>' : apply_filters('the_content', $shop['address']); ?></div>
             </div>
           <?php
             }
