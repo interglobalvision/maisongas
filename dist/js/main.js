@@ -949,11 +949,12 @@ var Scroll = function () {
   function Scroll() {
     _classCallCheck(this, Scroll);
 
-    // value in pixels elements scrolled to will be from top of the window
-    this.scrollOffset = -60;
+    this.scrollOffset = 0;
 
     this.isClearHash = true;
     this.clearHashTimeout = 0;
+
+    this.$header = $('#header');
 
     $(document).ready(this.onReady.bind(this));
   }
@@ -961,6 +962,8 @@ var Scroll = function () {
   _createClass(Scroll, [{
     key: 'onReady',
     value: function onReady() {
+      // set scrollOffset
+      this.setScrollOffset();
       // fire hash change on load
       this.onHashChange();
       // and watch for hash changes
@@ -969,6 +972,8 @@ var Scroll = function () {
       window.addEventListener('scroll', this.onScroll.bind(this), false);
       // listen to image load events and retrigger hashchange as to catch lazyload repaints
       $('img').on('load', this.onHashChange.bind(this));
+      // what for window resize to calculate scrollOffset
+      window.addEventListener('resize', this.setScrollOffset.bind(this), false);
     }
   }, {
     key: 'onHashChange',
@@ -1013,6 +1018,11 @@ var Scroll = function () {
       } else {
         location.hash = '';
       }
+    }
+  }, {
+    key: 'setScrollOffset',
+    value: function setScrollOffset() {
+      this.scrollOffset = (this.$header.outerHeight(true) - this.$header.innerHeight()) * 2 * -1;
     }
   }]);
 
