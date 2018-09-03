@@ -967,6 +967,8 @@ var Scroll = function () {
       window.addEventListener('hashchange', this.onHashChange.bind(this), false);
       // watch for scroll
       window.addEventListener('scroll', this.onScroll.bind(this), false);
+      // listen to image load events and retrigger hashchange as to catch lazyload repaints
+      $('img').on('load', this.onHashChange.bind(this));
     }
   }, {
     key: 'onHashChange',
@@ -997,7 +999,7 @@ var Scroll = function () {
     }
   }, {
     key: 'onScroll',
-    value: function onScroll(event) {
+    value: function onScroll() {
       var location = window.location;
 
       // if there is no hash or hash clearing is turned off stop here

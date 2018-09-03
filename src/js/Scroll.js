@@ -21,6 +21,8 @@ class Scroll {
     window.addEventListener('hashchange', this.onHashChange.bind(this), false);
     // watch for scroll
     window.addEventListener('scroll', this.onScroll.bind(this), false);
+    // listen to image load events and retrigger hashchange as to catch lazyload repaints
+    $('img').on('load', this.onHashChange.bind(this));
   }
 
   onHashChange() {
@@ -49,7 +51,7 @@ class Scroll {
     }
   }
 
-  onScroll(event) {
+  onScroll() {
     let location = window.location;
 
     // if there is no hash or hash clearing is turned off stop here
