@@ -10,7 +10,7 @@ $margin-large = ($gutter * 6)
 $font-size-basic = 16px
 $font-size-small = $font-size-basic * .5
 $font-size-mid = $font-size-basic * 1.5
-$font-size-large = $font-size-basic * 4
+$font-size-large = $font-size-basic * 2.5
 
 grid-maker(100%, $gutter, s)
 
@@ -51,28 +51,24 @@ font-sizes($font-size-basic, false, $font-size-large, $font-size-mid, $font-size
 // HEADER
 
 #nav-about
-  order: 1
   position: fixed
   top: 0
   left: 0
   z-index: 200
 
 #nav-stockists
-  order: 2
-  text-align: right
   position: fixed
   top: 0
   right: 0
   z-index: 200
 
 #site-title
-  order: 3
-  margin-top: $margin-basic
   z-index: 1
+  max-width: 260px
 
 // ******************************************************
 
 // TOP
 
 section#top
-  margin-top: -($margin-mid)
+  margin-top: -($margin-basic)

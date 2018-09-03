@@ -366,7 +366,7 @@ class Dust {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     //This sets the color to draw with.
-    this.ctx.strokeStyle = "#555555";
+    this.ctx.strokeStyle = "#777777";
 
     //This calls the function to update the particle positions.
     this.update_particle();
