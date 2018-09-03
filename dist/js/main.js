@@ -964,20 +964,25 @@ var Scroll = function () {
     value: function onReady() {
       // set scrollOffset
       this.setScrollOffset();
-      // fire hash change on load
-      this.onHashChange();
-      // and watch for hash changes
-      window.addEventListener('hashchange', this.onHashChange.bind(this), false);
+
       // watch for scroll
       window.addEventListener('scroll', this.onScroll.bind(this), false);
-      // listen to image load events and retrigger hashchange as to catch lazyload repaints
-      $('img').on('load', this.onHashChange.bind(this));
-      // what for window resize to calculate scrollOffset
+
+      // watch for window resize to calculate scrollOffset
       window.addEventListener('resize', this.setScrollOffset.bind(this), false);
+
+      // check for hash and scroll if so
+      this.checkAndScroll();
+
+      // watch for hash changes to check
+      window.addEventListener('hashchange', this.checkAndScroll.bind(this), false);
+
+      // listen to image load events and retrigger hashchange as to catch lazyload repaints
+      $('img').on('load', this.checkAndScroll.bind(this));
     }
   }, {
-    key: 'onHashChange',
-    value: function onHashChange() {
+    key: 'checkAndScroll',
+    value: function checkAndScroll() {
       var _this = this;
       var hash = window.location.hash;
 
@@ -986,6 +991,7 @@ var Scroll = function () {
         // turn off hash clearing
         this.isClearHash = false;
 
+        // find target in hash and scroll to
         hash = hash.substring(3);
 
         var $target = $('#' + hash);
@@ -1022,6 +1028,7 @@ var Scroll = function () {
   }, {
     key: 'setScrollOffset',
     value: function setScrollOffset() {
+      // set scrollOffset to negative twice the margins of the header element
       this.scrollOffset = (this.$header.outerHeight(true) - this.$header.innerHeight()) * 2 * -1;
     }
   }]);
