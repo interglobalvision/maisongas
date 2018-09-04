@@ -39,7 +39,7 @@ if (have_posts()) {
 
     if (!empty($subheading)) {
 ?>
-        <div class="grid-row text-align-center font-uppercase">
+        <div class="grid-row text-align-center">
           <div class="grid-item item-s-12">
             <span><?php echo $subheading; ?></span>
           </div>
