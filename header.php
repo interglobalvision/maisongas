@@ -30,17 +30,24 @@ get_template_part('partials/seo');
 
 <section id="main-container">
 
-  <header id="header" class="margin-bottom-basic">
+  <header id="header" class="margin-top-large">
+    <nav id="main-nav">
+      <div class="container">
+        <div class="grid-row font-uppercase justify-between">
+          <div id="nav-about" class="grid-item padding-top-small">
+            <a href="#!/about">About</a>
+          </div>
+          <div id="nav-stockists" class="grid-item padding-top-small">
+            <a href="#!/stockists">Stockists</a>
+          </div>
+        </div>
+      </div>
+    </nav>
     <div class="container">
-      <div class="grid-row font-uppercase justify-center">
-        <div id="nav-about" class="grid-item padding-top-small">
-          <a href="#!/about">About</a>
-        </div>
-        <div id="site-title" class="grid-item item-s-8 item-m-12 text-align-center padding-top-tiny">
-          <h1 class="font-size-large"><a href="<?php echo home_url(); ?>">Maison Gas</a></h1>
-        </div>
-        <div id="nav-stockists" class="grid-item padding-top-small">
-          <a href="#!/stockists">Stockists</a>
+      <div class="grid-row">
+        <div id="site-title" class="grid-item item-s-12 font-uppercase text-align-center">
+          <h1 class="font-size-large">Maison Gas</h1>
+          <span class="font-size-large">Los Angeles</span>
         </div>
       </div>
     </div>
