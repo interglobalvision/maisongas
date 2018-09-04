@@ -189,8 +189,7 @@ if (have_posts()) {
             foreach($stockists as $shop) {
           ?>
             <div class="grid-item item-s-12 item-m-6">
-              <div><span><?php echo $shop['name']; ?></span></div>
-              <div class="u-inline-block"><?php echo !empty($shop['map_url']) ? '<a href="' . $shop['map_url'] . '">' . apply_filters('the_content', $shop['address']) . '</a>' : apply_filters('the_content', $shop['address']); ?></div>
+              <?php echo apply_filters('the_content', $shop['address']); ?>
             </div>
           <?php
             }
