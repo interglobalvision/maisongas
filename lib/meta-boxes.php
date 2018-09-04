@@ -142,21 +142,14 @@ function igv_cmb_metaboxes() {
     ) );
 
     $home_metabox->add_group_field( $stockists_group, array(
-      'name'       => esc_html__( 'Name', 'cmb2' ),
-      'id'         => 'name',
-      'type'       => 'text',
-    ) );
-
-    $home_metabox->add_group_field( $stockists_group, array(
-      'name'       => esc_html__( 'Address', 'cmb2' ),
+      'name'       => esc_html__( 'Stockist', 'cmb2' ),
       'id'         => 'address',
-      'type'       => 'textarea',
-    ) );
-
-    $home_metabox->add_group_field( $stockists_group, array(
-      'name'       => esc_html__( 'Google Map URL', 'cmb2' ),
-      'id'         => 'map_url',
-      'type'       => 'text_url',
+      'type'       => 'wysiwyg',
+      'description' => esc_html__( 'Telephone links use tel:5555555555', 'cmb2' ),
+      'options' => array(
+        'media_buttons' => false, // show insert/upload button(s)
+        'textarea_rows' => get_option('default_post_edit_rows', 5), // rows="..."
+      ),
     ) );
 
     $home_metabox->add_field( array(
