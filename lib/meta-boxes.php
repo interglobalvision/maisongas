@@ -121,7 +121,11 @@ function igv_cmb_metaboxes() {
     $home_metabox->add_field( array(
       'name'       => esc_html__( 'Editions Note', 'cmb2' ),
       'id'         => $prefix . 'home_editions_note',
-      'type'       => 'textarea_small',
+      'type'       => 'wysiwyg',
+      'options' => array(
+        'media_buttons' => false, // show insert/upload button(s)
+        'textarea_rows' => get_option('default_post_edit_rows', 5), // rows="..."
+      ),
     ) );
 
     $stockists_group = $home_metabox->add_field( array(
