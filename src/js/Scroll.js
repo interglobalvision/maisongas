@@ -1,3 +1,5 @@
+/* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, document */
 import smoothscroll from 'smoothscroll-polyfill';
 
 // kick off the polyfill just in case
@@ -12,7 +14,14 @@ class Scroll {
 
     this.$header = $('#header');
 
-    $(document).ready(this.onReady.bind(this));
+    // BINDS
+    this.onReady = this.onReady.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+    this.setScrollOffset = this.setScrollOffset.bind(this);
+    this.checkAndScroll = this.checkAndScroll.bind(this);
+
+    // EVENTS
+    $(document).ready(this.onReady);
   }
 
   onReady() {
@@ -20,19 +29,19 @@ class Scroll {
     this.setScrollOffset();
 
     // watch for scroll
-    window.addEventListener('scroll', this.onScroll.bind(this), false);
+    window.addEventListener('scroll', this.onScroll, false);
 
     // watch for window resize to calculate scrollOffset
-    window.addEventListener('resize', this.setScrollOffset.bind(this), false);
+    window.addEventListener('resize', this.setScrollOffset, false);
 
     // check for hash and scroll if so
     this.checkAndScroll();
 
     // watch for hash changes to check
-    window.addEventListener('hashchange', this.checkAndScroll.bind(this), false);
+    window.addEventListener('hashchange', this.checkAndScroll, false);
 
     // listen to image load events and retrigger hashchange as to catch lazyload repaints
-    $('img').on('load', this.checkAndScroll.bind(this));
+    $('img').on('load', this.checkAndScroll);
   }
 
   checkAndScroll() {

@@ -932,7 +932,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, document */
+
 
 var _smoothscrollPolyfill = __webpack_require__(5);
 
@@ -956,7 +958,14 @@ var Scroll = function () {
 
     this.$header = $('#header');
 
-    $(document).ready(this.onReady.bind(this));
+    // BINDS
+    this.onReady = this.onReady.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+    this.setScrollOffset = this.setScrollOffset.bind(this);
+    this.checkAndScroll = this.checkAndScroll.bind(this);
+
+    // EVENTS
+    $(document).ready(this.onReady);
   }
 
   _createClass(Scroll, [{
@@ -966,19 +975,19 @@ var Scroll = function () {
       this.setScrollOffset();
 
       // watch for scroll
-      window.addEventListener('scroll', this.onScroll.bind(this), false);
+      window.addEventListener('scroll', this.onScroll, false);
 
       // watch for window resize to calculate scrollOffset
-      window.addEventListener('resize', this.setScrollOffset.bind(this), false);
+      window.addEventListener('resize', this.setScrollOffset, false);
 
       // check for hash and scroll if so
       this.checkAndScroll();
 
       // watch for hash changes to check
-      window.addEventListener('hashchange', this.checkAndScroll.bind(this), false);
+      window.addEventListener('hashchange', this.checkAndScroll, false);
 
       // listen to image load events and retrigger hashchange as to catch lazyload repaints
-      $('img').on('load', this.checkAndScroll.bind(this));
+      $('img').on('load', this.checkAndScroll);
     }
   }, {
     key: 'checkAndScroll',
