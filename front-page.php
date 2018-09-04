@@ -45,7 +45,7 @@ if (have_posts()) {
 
     if (!empty($subheading)) {
 ?>
-        <div class="grid-row text-align-center font-uppercase">
+        <div class="grid-row text-align-center">
           <div class="grid-item item-s-12">
             <span><?php echo $subheading; ?></span>
           </div>
@@ -134,8 +134,11 @@ if (have_posts()) {
 <?php
       if (!empty($editions_note)) {
 ?>
-        <div class="grid-row">
-          <div class="grid-item item-s-12 item-m-6 font-size-small">
+        <div class="grid-row justify-center">
+          <div class="grid-item item-s-12 margin-bottom-small">
+            <h2 class="text-align-center">EDITIONS</h2>
+          </div>
+          <div class="grid-item item-s-12 item-m-7 text-align-center margin-bottom-small">
             <?php echo apply_filters('the_content', $editions_note); ?>
           </div>
         </div>
@@ -173,10 +176,10 @@ if (have_posts()) {
     wp_reset_postdata();
 
 ?>
-      <section id="stockists" class="margin-bottom-large font-uppercase">
+      <section id="stockists" class="margin-bottom-large">
         <div class="grid-row margin-bottom-tiny">
           <div class="grid-item">
-            <h2>Stockists</h2>
+            <h2>STOCKISTS</h2>
           </div>
         </div>
 <?php
