@@ -30,7 +30,13 @@ if (have_posts()) {
 
         <div class="grid-row justify-center margin-bottom-small">
           <div class="grid-item">
-            <?php echo wp_get_attachment_image($top_image, 'height-900'); ?>
+            <?php
+              if (get_post_mime_type($top_image) === 'image/gif') {
+                echo wp_get_attachment_image($top_image, 'full');
+              } else {
+                echo wp_get_attachment_image($top_image, 'height-900');
+              }
+            ?>
           </div>
         </div>
 
@@ -68,14 +74,26 @@ if (have_posts()) {
           if (!empty($middle_image_1)) {
         ?>
           <div class="grid-item item-s-12 item-m-6 text-align-center margin-bottom-mid">
-            <?php echo wp_get_attachment_image($middle_image_1, 'height-900'); ?>
+            <?php
+              if (get_post_mime_type($middle_image_1) === 'image/gif') {
+                echo wp_get_attachment_image($middle_image_1, 'full');
+              } else {
+                echo wp_get_attachment_image($middle_image_1, 'height-900');
+              }
+            ?>
           </div>
         <?php
           }
           if (!empty($middle_image_2)) {
         ?>
           <div class="grid-item item-s-12 item-m-6 text-align-center margin-bottom-mid">
-            <?php echo wp_get_attachment_image($middle_image_2, 'height-900'); ?>
+            <?php
+              if (get_post_mime_type($middle_image_2) === 'image/gif') {
+                echo wp_get_attachment_image($middle_image_2, 'full');
+              } else {
+                echo wp_get_attachment_image($middle_image_2, 'height-900');
+              }
+            ?>
           </div>
         <?php
           }
@@ -131,7 +149,13 @@ if (have_posts()) {
 ?>
         <div class="grid-row">
           <div class="grid-item item-s-12 item-m-6 no-gutter-image-holder margin-bottom-small">
-            <?php echo the_post_thumbnail('height-900'); ?>
+            <?php
+              if (get_post_mime_type(get_post_thumbnail_id()) === 'image/gif') {
+                echo the_post_thumbnail('full');
+              } else {
+                echo the_post_thumbnail('height-900');
+              }
+            ?>
           </div>
           <div class="grid-item item-s-12 item-m-6">
             <div><span><?php echo !empty($edition_number) ? 'Edition ' . $edition_number : ''; ?></span></div>
@@ -173,7 +197,13 @@ if (have_posts()) {
           ?>
           </div>
           <div class="grid-item item-s-12 item-m-4 no-gutter-image-holder align-self-end margin-top-mid">
-            <?php echo wp_get_attachment_image($stockists_image, 'width-640'); ?>
+            <?php
+              if (get_post_mime_type($stockists_image) === 'image/gif') {
+                echo wp_get_attachment_image($stockists_image, 'full');
+              } else {
+                echo wp_get_attachment_image($stockists_image, 'width-640');
+              }
+            ?>
           </div>
         </div>
 
