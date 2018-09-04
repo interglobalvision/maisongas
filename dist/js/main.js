@@ -932,7 +932,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, document */
+
 
 var _smoothscrollPolyfill = __webpack_require__(5);
 
@@ -949,27 +951,56 @@ var Scroll = function () {
   function Scroll() {
     _classCallCheck(this, Scroll);
 
-    // value in pixels elements scrolled to will be from top of the window
-    this.scrollOffset = -60;
+    this.scrollOffset = 0;
 
-    $(document).ready(this.onReady.bind(this));
+    this.isClearHash = true;
+    this.clearHashTimeout = 0;
+
+    this.$header = $('#header');
+
+    // BINDS
+    this.onReady = this.onReady.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+    this.setScrollOffset = this.setScrollOffset.bind(this);
+    this.checkAndScroll = this.checkAndScroll.bind(this);
+
+    // EVENTS
+    $(document).ready(this.onReady);
   }
 
   _createClass(Scroll, [{
     key: 'onReady',
     value: function onReady() {
-      // fire hash change on load
-      this.onHashChange();
-      // and watch for hash changes
-      window.addEventListener('hashchange', this.onHashChange.bind(this), false);
+      // set scrollOffset
+      this.setScrollOffset();
+
+      // watch for scroll
+      window.addEventListener('scroll', this.onScroll, false);
+
+      // watch for window resize to calculate scrollOffset
+      window.addEventListener('resize', this.setScrollOffset, false);
+
+      // check for hash and scroll if so
+      this.checkAndScroll();
+
+      // watch for hash changes to check
+      window.addEventListener('hashchange', this.checkAndScroll, false);
+
+      // listen to image load events and retrigger hashchange as to catch lazyload repaints
+      $('img').on('load', this.checkAndScroll);
     }
   }, {
-    key: 'onHashChange',
-    value: function onHashChange() {
+    key: 'checkAndScroll',
+    value: function checkAndScroll() {
+      var _this = this;
       var hash = window.location.hash;
 
       // check if is hashbang link
       if (hash.includes('#!/')) {
+        // turn off hash clearing
+        this.isClearHash = false;
+
+        // find target in hash and scroll to
         hash = hash.substring(3);
 
         var $target = $('#' + hash);
@@ -978,7 +1009,36 @@ var Scroll = function () {
           top: $target.offset().top + this.scrollOffset,
           behavior: 'smooth'
         });
+
+        // set timeout to turn back on hash clearing
+        window.clearTimeout(this.clearHashTimeout);
+        this.clearHashTimeout = setTimeout(function () {
+          _this.isClearHash = true;
+        }, 1000);
       }
+    }
+  }, {
+    key: 'onScroll',
+    value: function onScroll() {
+      var location = window.location;
+
+      // if there is no hash or hash clearing is turned off stop here
+      if (location.hash === '' || !this.isClearHash) {
+        return;
+      }
+
+      // if browser supports history clear the whole hash, otherwise clear back to just #
+      if ('pushState' in history) {
+        history.pushState('', document.title, location.pathname + location.search);
+      } else {
+        location.hash = '';
+      }
+    }
+  }, {
+    key: 'setScrollOffset',
+    value: function setScrollOffset() {
+      // set scrollOffset to negative twice the margins of the header element
+      this.scrollOffset = (this.$header.outerHeight(true) - this.$header.innerHeight()) * 2 * -1;
     }
   }]);
 
