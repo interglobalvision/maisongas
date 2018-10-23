@@ -110,6 +110,16 @@ function igv_cmb_metaboxes() {
     ) );
 
     $home_metabox->add_field( array(
+      'name'       => esc_html__( 'Text 3', 'cmb2' ),
+      'id'         => $prefix . 'home_text_3',
+      'type'       => 'wysiwyg',
+      'options' => array(
+        'media_buttons' => true, // show insert/upload button(s)
+        'textarea_rows' => get_option('default_post_edit_rows', 5), // rows="..."
+      ),
+    ) );
+
+    $home_metabox->add_field( array(
       'name'       => esc_html__( 'Honeypot Images', 'cmb2' ),
       'description' => esc_html__( '<span class="honeypot">your text</span>', 'cmb2' ),
       'id'         => $prefix . 'home_honeypot_images',
