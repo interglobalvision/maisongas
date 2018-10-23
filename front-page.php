@@ -15,6 +15,7 @@ if (have_posts()) {
     $middle_image_1 = get_post_meta($post->ID, '_igv_home_middle_image_1_id', true);
     $middle_image_2 = get_post_meta($post->ID, '_igv_home_middle_image_2_id', true);
     $text_2 = get_post_meta($post->ID, '_igv_home_text_2', true);
+    $text_3 = get_post_meta($post->ID, '_igv_home_text_3', true);
     $stockists = get_post_meta($post->ID, '_igv_home_stockists', true);
     $stockists_image = get_post_meta($post->ID, '_igv_home_stockists_image_id', true);
     $editions_note = get_post_meta($post->ID, '_igv_home_editions_note', true);
@@ -106,6 +107,15 @@ if (have_posts()) {
         <div class="grid-row margin-top-small">
           <div class="grid-item font-size-mid">
             <?php echo apply_filters('the_content', $text_2); ?>
+          </div>
+        </div>
+<?php
+    }
+    if (!empty($text_3)) {
+?>
+        <div class="grid-row margin-top-small">
+          <div class="grid-item item-s-12 item-m-7">
+            <?php echo apply_filters('the_content', $text_3); ?>
           </div>
         </div>
 <?php
